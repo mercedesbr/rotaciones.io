@@ -5,7 +5,7 @@ let relojCorriendo = false;
 // Configuración de tiempos
 let cuartoActual = 1;
 let modoDescanso = false;
-let tiempoCuarto = 3 * 60; // 17 minutos por cuarto
+let tiempoCuarto = 17 * 60; // 17 minutos por cuarto
 let segundosRestantes = tiempoCuarto; // Empezamos con el 1er cuarto
 
 function agregarJugador() {
@@ -119,7 +119,7 @@ function manejarCambioDePeriodoAutomatico() {
         // Iniciar Siguiente Cuarto Automático
         modoDescanso = false;
         cuartoActual++;
-        segundosRestantes = 17 * 60;
+        segundosRestantes = tiempoCuarto;
         
         // Restaurar posiciones iniciales
         listaJugadores.forEach(p => p.enCancha = p.estadoInicial);
