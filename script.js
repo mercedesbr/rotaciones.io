@@ -88,11 +88,13 @@ function bajarTiempo() {
     if (!modoDescanso) {
         const m = Math.floor(segundosRestantes / 60);
         const s = segundosRestantes % 60;
-        listaJugadores.forEach(p => {
-            if (!p.enCancha && p.minCambio === m && s === 0) {
-                ejecutarCambioAutomatico(p);
-            }
-        });
+
+        // Buscamos todos los jugadores que deben entrar en este segundo
+        const cambiosDeEsteMinuto = listaJugadores.filter(p => !p.enCancha && p.minCambio === m && s === 0);
+
+        if (cambiosDeEsteMinuto.length > 0) {
+            procesarMultiplesCambios(cambiosDeEsteMinuto);
+        }
     }
 }
 
@@ -140,22 +142,40 @@ function actualizarDisplay() {
         `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
-function ejecutarCambioAutomatico(pEntra) {
-    const pSale = listaJugadores.find(j => j.id === pEntra.jugadorACambiar);
-    if (pSale && pSale.enCancha) {
-        pEntra.enCancha = true;
-        pSale.enCancha = false;
-        mostrarAlerta(`🔄 CAMBIO: Entra #${pEntra.id} - ${pEntra.nombre} por #${pSale.id} - ${pSale.nombre}`);
+function procesarMultiplesCambios(jugadoresQueEntran) {
+    let mensajes = [];
+
+    jugadoresQueEntran.forEach(pEntra => {
+        const pSale = listaJugadores.find(j => j.id === pEntra.jugadorACambiar);
+        
+        if (pSale && pSale.enCancha) {
+            pEntra.enCancha = true;
+            pSale.enCancha = false;
+            mensajes.push(`Entra #${pEntra.id} por #${pSale.id}`);
+        }
+    });
+
+    if (mensajes.length > 0) {
+        // Unimos todos los mensajes con un salto de línea o un separador
+        const alertaFinal = "🔄 <strong>CAMBIOS:</strong><br>" + mensajes.join('<br>');
+        mostrarAlerta(alertaFinal);
         renderJuego();
+        
+        // Sonido de alerta único para el grupo de cambios
+        const audio = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+        audio.play();
     }
 }
 
 function mostrarAlerta(msj) {
     const div = document.getElementById('alerta-cambio');
-    div.innerText = msj;
+    div.innerHTML = msj; // Cambiado a innerHTML para soportar el listado
     div.style.display = 'block';
-    setTimeout(() => { div.style.display = 'none'; }, 5000);
+    
+    // Aumentamos un poco el tiempo a 8 segundos para que dé tiempo a leer varios nombres
+    setTimeout(() => { div.style.display = 'none'; }, 8000);
 }
+
 
 function renderJuego() {
     const cancha = document.getElementById('jugadores-cancha');
