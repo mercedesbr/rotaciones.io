@@ -90,3 +90,37 @@ th, td {
     margin: 10px 0; 
     text-align: center; 
 }
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    /* El formulario pasa de horizontal a vertical */
+    .form-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* La cuadrícula de la cancha pasa de 2 columnas a 1 */
+    .grid-cancha {
+        grid-template-columns: 1fr;
+    }
+
+    /* Hacemos que las tablas se puedan scrollear lateralmente si son muy anchas */
+    .card {
+        overflow-x: auto;
+        padding: 15px;
+    }
+
+    th, td {
+        font-size: 0.9rem; /* Texto un poco más chico para que entre */
+        padding: 8px 5px;
+    }
+
+    #timer-display {
+        font-weight: bold;
+    }
+}
