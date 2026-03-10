@@ -1,18 +1,21 @@
+/* --- Estilos base que ya tenías --- */
 body { 
     background-color: #121212; 
     color: #e0e0e0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; /* Añadido para evitar bordes blancos */
 }
 .container { 
     max-width: 1200px; 
-    margin: 20px auto; 
-    padding: 10px; 
+    margin: 0 auto; 
+    padding: 15px; 
 }
 .card { 
     background: #1e1e1e; 
     padding: 20px; 
     border-radius: 10px; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+    margin-bottom: 20px;
 }
 .form-group { 
     display: flex; 
@@ -20,9 +23,10 @@ body {
     margin-bottom: 20px; 
 }
 input, select, button { 
-    padding: 10px; 
+    padding: 12px; /* Un poco más de padding para dedos en móvil */
     border-radius: 5px; 
     border: none; 
+    font-size: 16px; /* Evita que iOS haga zoom automático al enfocar */
 }
 input, select { 
     background: #333; 
@@ -31,8 +35,9 @@ input, select {
 }
 button { 
     background: #27ae60; 
-    color: white; cursor: 
-    pointer; font-weight: bold; 
+    color: white; 
+    cursor: pointer; 
+    font-weight: bold; 
 }
 button:hover { 
     background: #2ecc71; 
@@ -58,7 +63,7 @@ th, td {
     margin-bottom: 20px; 
 }
 #timer-display { 
-    font-size: 4rem; 
+    font-size: clamp(2.5rem, 15vw, 4rem); /* Tamaño fluido según pantalla */
     color: #2ecc71; 
     margin: 10px 0; 
 }
@@ -91,7 +96,7 @@ th, td {
     text-align: center; 
 }
 
-/* --- RESPONSIVE --- */
+/* --- AJUSTES RESPONSIVE (CELULARES) --- */
 
 @media (max-width: 768px) {
     .container {
