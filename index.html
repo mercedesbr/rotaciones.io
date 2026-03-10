@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hockey Rotation App</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Control de Rotaciones - Hockey</h1>
+
+        <section id="setup-section">
+            <div class="card">
+                <h3>Ingreso Manual de Jugadores</h3>
+                <div class="form-group">
+                    <input type="number" id="p-id" placeholder="Numero">
+                    <input type="text" id="p-name" placeholder="Nombre">
+                    <select id="p-pos">
+                        <option value="DF">Defensa</option>
+                        <option value="MF">Volante</option>
+                        <option value="FW">Delantero</option>
+                        <option value="GK">Arquero</option>
+                    </select>
+                        <select id="p-enCancha">
+                        <option value="T">En Cancha</option>
+                        <option value="F">Suplente</option>
+                    </select>
+                    <input type="number" id="p-cambio" placeholder="Min Cambio">
+                    <input type="number" id="p-jugadorCambio" placeholder="Jugador a Cambiar">
+                    <button onclick="agregarJugador()">Añadir</button>
+                </div>
+                <table id="tabla-previa">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Posición</th>
+                            <th>Estado</th>
+                            <th>Min Cambio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-previa"></tbody>
+                </table>
+                <button class="btn-start" onclick="iniciarPartido()">INICIAR PARTIDO</button>
+            </div>
+        </section>
+
+        <section id="game-section" style="display:none;">
+            <div class="timer-card">
+                <h2 id="timer-display">--:--</h2>
+                <button id="btn-timer" onclick="controlarReloj()">PAUSAR</button>
+            </div>
+
+            <div id="alerta-cambio" class="alerta"></div>
+
+            <div class="grid-cancha">
+                <div class="panel">
+                    <h3>En Cancha</h3>
+                    <div id="jugadores-cancha"></div>
+                </div>
+                <div class="panel">
+                    <h3>Banco / Suplentes</h3>
+                    <div id="jugadores-banco"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
