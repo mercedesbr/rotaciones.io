@@ -1,4 +1,3 @@
-/* --- Estilos base que ya tenías --- */
 body { 
     background-color: #121212; 
     color: #e0e0e0; 
@@ -97,35 +96,52 @@ th, td {
 }
 
 /* --- AJUSTES RESPONSIVE (CELULARES) --- */
-
-@media (max-width: 768px) {
+@media screen and (max-width: 720px) {
+    /* 1. Contenedor con menos margen para ganar espacio */
     .container {
         padding: 10px;
     }
 
-    /* El formulario pasa de horizontal a vertical */
+    /* 2. El formulario se vuelve vertical */
     .form-group {
-        flex-direction: column;
+        flex-direction: column; 
+        gap: 12px; /* Más espacio entre inputs para no errar el dedo */
+    }
+
+    /* Forzamos a que todos los inputs midan el 100% */
+    .form-group input, 
+    .form-group select, 
+    .form-group button {
+        width: 100%;
+        height: 45px; /* Altura cómoda para móviles */
+        box-sizing: border-box;
+    }
+
+    /* 3. La tabla de jugadoras: ¡El gran problema de los móviles! */
+    /* Hacemos que la tabla se pueda scrollear de costado sin romper el diseño */
+    #tabla-previa {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* 4. Paneles de Cancha y Banco: Uno arriba del otro */
+    .grid-cancha {
+        grid-template-columns: 1fr; /* Una sola columna */
         gap: 15px;
     }
 
-    /* La cuadrícula de la cancha pasa de 2 columnas a 1 */
-    .grid-cancha {
-        grid-template-columns: 1fr;
+    .panel {
+        min-height: auto; /* Que crezca según la cantidad de jugadoras */
     }
 
-    /* Hacemos que las tablas se puedan scrollear lateralmente si son muy anchas */
-    .card {
-        overflow-x: auto;
-        padding: 15px;
-    }
-
-    th, td {
-        font-size: 0.9rem; /* Texto un poco más chico para que entre */
-        padding: 8px 5px;
+    /* 5. Ajustes de texto */
+    h1 {
+        font-size: 1.4rem;
+        text-align: center;
     }
 
     #timer-display {
-        font-weight: bold;
+        font-size: 3.5rem;
     }
 }
