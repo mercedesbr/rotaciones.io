@@ -5,9 +5,9 @@ body {
     margin: 0; /* Añadido para evitar bordes blancos */
 }
 .container { 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 15px; 
+    max-width: auto; 
+    margin: 15px auto; 
+    padding: 25px; 
 }
 .card { 
     background: #1e1e1e; 

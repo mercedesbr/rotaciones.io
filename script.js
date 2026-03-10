@@ -119,7 +119,7 @@ function manejarCambioDePeriodoAutomatico() {
         // Iniciar Siguiente Cuarto Automático
         modoDescanso = false;
         cuartoActual++;
-        segundosRestantes = tiempoCuarto;
+        segundosRestantes = 17 * 60;
         
         // Restaurar posiciones iniciales
         listaJugadores.forEach(p => p.enCancha = p.estadoInicial);
